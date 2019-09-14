@@ -1,0 +1,12 @@
+FROM node:12-alpine as build
+WORKDIR /usr/app
+COPY package.json ./
+RUN npm --quiet install
+COPY rollup.config.js ./
+COPY src src
+COPY .storybook .storybook
+COPY stories stories
+RUN npm run build-storybook
+
+FROM nginx:mainline-alpine
+COPY --from=build /usr/app/.out /usr/share/nginx/html

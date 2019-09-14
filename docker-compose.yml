@@ -1,0 +1,10 @@
+version: '3'
+services:
+  storybook:
+    build: .
+    container_name: svelte-components
+    ports:
+      - 80:80
+    volumes:
+      - ./src:/usr/app/src
+      - ./stories:/usr/app/stories

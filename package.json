@@ -1,0 +1,46 @@
+{
+  "name": "simple-svelte-components",
+  "version": "1.0.1",
+  "description": "Reusable svelte components for quick application development",
+  "svelte": "src/index.js",
+  "module": "dist/index.mjs",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "./test.sh",
+    "start": "start-storybook --host 0.0.0.0 --port 80 --ci",
+    "build-storybook": "build-storybook -c .storybook -o .out"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "babel-loader": "^8.0.6",
+    "@storybook/svelte": "^5.2.0",
+    "rollup": "^1.21.2",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-svelte": "^5.1.0",
+    "svelte": "^3.12.1",
+    "svelte-loader": "2.13.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wickning1/svelte-components.git"
+  },
+  "keywords": [
+    "svelte",
+    "svelte3",
+    "components",
+    "ui",
+    "ux",
+    "library"
+  ],
+  "author": "Nick Wing",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wickning1/svelte-components/issues"
+  },
+  "homepage": "https://github.com/wickning1/svelte-components#readme",
+  "files": [
+    "dist",
+    "src"
+  ]
+}
