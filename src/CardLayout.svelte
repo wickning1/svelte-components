@@ -117,11 +117,11 @@
   }
 </style>
 
-<div class="cardlayout {className}" bind:clientWidth={w}>
+<div class="cardlayout {className}" role="list" bind:clientWidth={w}>
   {#each columnarray as idx}
-    <div class="cardlayout-column" style="width: calc({100 / columns}% - {guttereach}px); {idx ? 'margin-left: ' + gutter + 'px' : ''}" bind:this={columnelements[idx]}></div>
+    <div class="cardlayout-column" role="presentation" style="width: calc({100 / columns}% - {guttereach}px); {idx ? 'margin-left: ' + gutter + 'px' : ''}" bind:this={columnelements[idx]}></div>
   {/each}
-  <div class="cardlayout-unsorted" style="width: calc({100 / columns}% - {guttereach}px);" bind:this={unsortedcolumn}>
+  <div class="cardlayout-unsorted" role="presentation" style="width: calc({100 / columns}% - {guttereach}px);" bind:this={unsortedcolumn}>
     <slot></slot>
   </div>
 </div>
