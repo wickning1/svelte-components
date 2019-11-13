@@ -138,8 +138,9 @@
       for(const block of optimal[i]) {
         top += block.height + gutter
       }
-      fullheight = Math.max(fullheight, top) + 50
+      fullheight = Math.max(fullheight, top)
     }
+    fullheight += 20
   })
 </script>
 
