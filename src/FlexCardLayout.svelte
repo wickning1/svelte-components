@@ -134,7 +134,7 @@
       }
       fullheight = Math.max(fullheight, top)
     }
-    fullheight += 20
+    fullheight += 0
     if (cycling && saveheight > fullheight) fullheight = saveheight
   }
 
@@ -160,7 +160,11 @@
 
 <style>
   .cardlayout {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150%;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -170,8 +174,14 @@
     flex-direction: column;
     align-content: space-between;
   }
+  div {
+    position: relative;
+    overflow: hidden;
+  }
 </style>
 
-<ul class="cardlayout {className}" bind:this={layoutelement} style="height: {fullheight}px;">
-  <slot></slot>
-</ul>
+<div style="height: {fullheight}px;">
+  <ul class="cardlayout {className}" bind:this={layoutelement}>
+    <slot></slot>
+  </ul>
+</div>
