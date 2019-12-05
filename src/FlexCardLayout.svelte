@@ -11,6 +11,7 @@
   export let className = ''
 
   let blocks = []
+  let gutterstore = writable(gutter)
   setContext(CARDLAYOUT, {
     registerBlock: block => {
       blocks.push(block)
@@ -22,8 +23,14 @@
       block.width = writable('0px')
       return block
     },
-    gutter
+    recalculate: () => {
+      savewidth = 0
+      savecolumns = 0
+      triggerrecalc()
+    },
+    gutter: gutterstore
   })
+  $: gutterstore.set(gutter)
 
   let layoutelement
 

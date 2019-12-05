@@ -14,7 +14,7 @@
   }
 </style>
 
-<li class="cardlayout-card {className}" bind:this={block.element} style="margin-bottom: {gutter}px; width: {$width}; order: {$order};">
+<li class="cardlayout-card {className}" bind:this={block.element} style="margin-bottom: {$gutter}px; width: {$width}; order: {$order};">
   <slot></slot>
 </li>
 {#if $linebreak}

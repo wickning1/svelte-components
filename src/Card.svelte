@@ -7,6 +7,6 @@
   registerBlock(block)
 </script>
 
-<div class="cardlayout-card {className}" bind:this={block.element} role="listitem" style="margin-bottom: {gutter}px;">
+<div class="cardlayout-card {className}" bind:this={block.element} role="listitem" style="margin-bottom: {$gutter}px;">
   <slot></slot>
 </div>

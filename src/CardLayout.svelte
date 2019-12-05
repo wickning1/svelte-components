@@ -3,6 +3,7 @@
 </script>
 <script>
   import { afterUpdate, onDestroy, tick, setContext } from 'svelte'
+  import { writable } from 'svelte/store'
   export let maxwidth = 500
   export let widthguess = 1000
   export let preserveorder = false
@@ -10,6 +11,7 @@
   export let className = ''
 
   let blocks = []
+  let gutterstore = writable(gutter)
   setContext(CARDLAYOUT, {
     registerBlock: block => {
       blocks.push(block)
@@ -17,8 +19,14 @@
         blocks.splice(blocks.indexOf(block), 1)
       })
     },
-    gutter
+    recalculate: () => {
+      savewidth = 0
+      savecolumns = 0
+      triggerrecalc()
+    },
+    gutter: gutterstore
   })
+  $: gutterstore.set(gutter)
 
   // make number of columns rely on the current width of the card layout area
   let w = widthguess // this is bound to .cardlayout clientWidth, see HTML section below
