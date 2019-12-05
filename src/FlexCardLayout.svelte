@@ -6,7 +6,6 @@
   import { writable } from 'svelte/store'
   import ResizeObserver from 'resize-observer-polyfill'
   export let maxwidth = 500
-  export let widthguess = 1000
   export let preserveorder = false
   export let gutter = 10
   export let className = ''
