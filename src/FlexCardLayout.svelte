@@ -24,9 +24,7 @@
       return block
     },
     recalculate: () => {
-      savewidth = 0
-      savecolumns = 0
-      triggerrecalc()
+      hardrecalc()
     },
     gutter: gutterstore
   })
@@ -151,7 +149,13 @@
     })
   }
 
-  $: triggerrecalc(0, blocks.length) // little trick to trigger a sort when blocks array changes
+  function hardrecalc () {
+    savewidth = 0
+    savecolumns = 0
+    triggerrecalc()
+  }
+
+  $: hardrecalc(blocks.length) // little trick to trigger a sort when blocks array changes
   const ro = new ResizeObserver((entries, observer) => {
     triggerrecalc(entries[0].contentBoxSize || entries[0].contentRect.width)
   })
