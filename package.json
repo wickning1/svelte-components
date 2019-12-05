@@ -21,6 +21,9 @@
     "svelte": "^3.12.1",
     "svelte-loader": "2.13.6"
   },
+  "dependencies": {
+    "resize-observer-polyfill": "^1.5.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wickning1/svelte-components.git"
