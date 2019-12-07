@@ -10,17 +10,19 @@
   export let gutter = 10
   export let className = ''
 
-  let blocks = []
-  let gutterstore = writable(gutter)
+  const blocks = []
+  const gutterstore = writable(gutter)
   setContext(CARDLAYOUT, {
     registerBlock: block => {
       blocks.push(block)
+      hardrecalc()
       onDestroy(() => {
         blocks.splice(blocks.indexOf(block), 1)
+        hardrecalc()
       })
       block.order = writable(0)
       block.linebreak = writable(false)
-      block.width = writable('0px')
+      block.width = writable(savecolumns ? `calc(${100.0 / savecolumns}% - ${gutter * (savecolumns-1) / savecolumns}px` : '0px')
       return block
     },
     recalculate: () => {
@@ -51,6 +53,7 @@
   let savecolumns = 0
   let optimal
   let fullheight = 0
+  let hardrequired = false
   async function recalculate (realw) {
     let columns = Math.ceil(realw / maxwidth)
     let guttereach = gutter * (columns-1) / columns
@@ -63,7 +66,7 @@
     // collect all the card heights at this new column width
     for (const block of blocks) block.height = block.element.offsetHeight
 
-    if (columns !== savecolumns) { // only do real work if number of columns has changed, recalculate triggers on resize
+    if (columns !== savecolumns || hardrequired) { // only do real work if number of columns has changed, recalculate triggers on resize
       if (preserveorder) {
         optimal = [blocks]
         if (columns > 1) {
@@ -103,7 +106,6 @@
           // find the column with the smallest current height
           const colidx = heights.reduce((acc, curr, curridx) => curr < heights[acc] ? curridx : acc, 0)
           // record the height we are adding to the chosen column
-          // do NOT read the height from the DOM, it would cause thrashing
           heights[colidx] += block.height + gutter
           // move the current card to the chosen column
           if (!optimal[colidx]) optimal[colidx] = []
@@ -121,6 +123,7 @@
         }
       }
       savecolumns = columns
+      hardrequired = false
     }
     // re-adjust container height
     const saveheight = fullheight
@@ -133,7 +136,7 @@
       fullheight = Math.max(fullheight, top)
     }
     fullheight += 0
-    if (cycling && saveheight > fullheight) fullheight = saveheight
+    if (cycling && saveheight < fullheight) fullheight = saveheight
   }
 
   let timer
@@ -141,7 +144,7 @@
   function triggerrecalc (width) {
     if (!layoutelement) return
     if (!width) width = layoutelement.clientWidth
-    if (width === savewidth) return
+    if (width === savewidth && !hardrequired) return
     cancelAnimationFrame(timer)
     timer = requestAnimationFrame(() => {
       recalculate(width)
@@ -150,12 +153,12 @@
   }
 
   function hardrecalc () {
-    savewidth = 0
-    savecolumns = 0
+    hardrequired = true
+    cycle1 = 0
+    cycle2 = 0
     triggerrecalc()
   }
 
-  $: hardrecalc(blocks.length) // little trick to trigger a sort when blocks array changes
   const ro = new ResizeObserver((entries, observer) => {
     triggerrecalc(entries[0].contentBoxSize || entries[0].contentRect.width)
   })

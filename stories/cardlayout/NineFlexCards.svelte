@@ -4,35 +4,55 @@
   export let maxwidth = undefined
   export let className = 'test1'
   export let preserveorder = false
+  let cards = [
+    { ptop: 30 },
+    { ptop: 50 },
+    { ptop: 20 },
+    { ptop: 100 },
+    { ptop: 40 },
+    { ptop: 56.25 },
+    { ptop: 150 },
+    { ptop: 80 },
+    { ptop: 10 }
+  ]
+  function randheight () {
+    return Math.ceil(Math.random() * 150) + 20
+  }
+  function mutateall () {
+    cards = cards.map(c => ({ ptop: randheight() }))
+  }
+  function mutatecard () {
+    const which = Math.floor(Math.random() * cards.length)
+    cards[which].ptop = randheight()
+  }
+  function addcard () {
+    cards = [...cards, { ptop: randheight() }]
+  }
 </script>
 
 <style>
-  .card { position: relative; background-color: rgba(0, 0, 0, 0.3); }
+  .card {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.3);
+    transition: padding-top 0.5s;
+  }
+  .card:focus {
+    outline: 2px solid blue;
+  }
   .card span {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
   }
-  .card1 { padding-top: 30%; }
-  .card2 { padding-top: 50%; }
-  .card3 { padding-top: 20%; }
-  .card4 { padding-top: 100%; }
-  .card5 { padding-top: 40%; }
-  .card6 { padding-top: 56.25%; }
-  .card7 { padding-top: 150%; }
-  .card8 { padding-top: 80%; }
-  .card9 { padding-top: 10%; }
 </style>
 
 <CardLayout className={className} maxwidth={maxwidth} preserveorder={preserveorder}>
-  <Card><div class="card card1"><span>Card 1</span></div></Card>
-  <Card><div class="card card2"><span>Card 2</span></div></Card>
-  <Card><div class="card card3"><span>Card 3</span></div></Card>
-  <Card><div class="card card4"><span>Card 4</span></div></Card>
-  <Card><div class="card card5"><span>Card 5</span></div></Card>
-  <Card><div class="card card6"><span>Card 6</span></div></Card>
-  <Card><div class="card card7"><span>Card 7</span></div></Card>
-  <Card><div class="card card8"><span>Card 8</span></div></Card>
-  <Card><div class="card card9"><span>Card 9</span></div></Card>
+  {#each cards as card, i}
+    <Card><div class="card card{i+1}" style="padding-top: {card.ptop}%;" tabindex=0><span>Card {i+1}</span></div></Card>
+  {/each}
 </CardLayout>
+
+<button on:click={mutateall}>Randomize All</button>
+<button on:click={mutatecard}>Randomize Card</button>
+<button on:click={addcard}>Add Card</button>

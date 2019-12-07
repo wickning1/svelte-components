@@ -1,10 +1,21 @@
 <script>
   export let className = ''
-  import { getContext } from 'svelte'
+  import { getContext, onMount } from 'svelte'
+  import ResizeObserver from 'resize-observer-polyfill'
   import { CARDLAYOUT } from './FlexCardLayout.svelte'
   const block = {}
-  const { registerBlock, gutter } = getContext(CARDLAYOUT)
+  const { registerBlock, gutter, recalculate } = getContext(CARDLAYOUT)
   const { width, order, linebreak } = registerBlock(block)
+  let savew = 0
+  let saveh = 0
+  const ro = new ResizeObserver(entries => {
+    const w = entries[0].contentRect.width
+    const h = entries[0].contentRect.height
+    if (w === savew && h !== saveh) recalculate()
+    savew = w
+    saveh = h
+  })
+  onMount(() => ro.observe(block.element))
 </script>
 
 <style>
