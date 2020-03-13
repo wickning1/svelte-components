@@ -1,7 +1,7 @@
 <script>
   import { onMount, onDestroy, tick } from 'svelte'
   import { randomid } from 'txstate-utils'
-  import { ScreenReaderOnly } from '../'
+  import ScreenReaderOnly from '../ScreenReaderOnly.svelte'
   import { setCursorToEnd, modifierKey } from '../lib'
 
   export let name
