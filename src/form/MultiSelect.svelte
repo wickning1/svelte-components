@@ -146,7 +146,7 @@
       hilite(hilitedidx + 1)
     } else if (e.key === 'ArrowLeft') {
       select(selected.length - 1)
-    } else if (['Enter', 'Space'].includes(e.key)) {
+    } else if (['Enter', ' '].includes(e.key)) {
       addSelection(e)
       e.preventDefault()
     } else if (e.key === 'Escape') {
@@ -169,7 +169,7 @@
     } else if (e.key === 'ArrowRight') {
       if (selectedidx === selected.length - 1) inputelement.focus()
       else select(selectedidx + 1)
-    } else if (['Backspace', 'Delete', 'Clear', 'Space', 'Enter'].includes(e.key)) {
+    } else if (['Backspace', 'Delete', 'Clear', ' ', 'Enter'].includes(e.key)) {
       removeSelection(e.target, e.key === 'Delete' ? 1 : -1)
       e.preventDefault()
     } else if (e.key === 'Escape') {
@@ -192,7 +192,7 @@
   function onfocusout (e) {
     activearea = menuelement.contains(e.relatedTarget)
     clearTimeout(timer)
-    setTimeout(() => { inputvalue = '' }, 500)
+    timer = setTimeout(() => { inputvalue = '' }, 500)
   }
 </script>
 
