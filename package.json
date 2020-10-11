@@ -1,6 +1,6 @@
 {
   "name": "simple-svelte-components",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Reusable svelte components for quick application development",
   "svelte": "src/index.js",
   "module": "dist/index.mjs",
