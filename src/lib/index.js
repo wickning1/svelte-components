@@ -1,6 +1,6 @@
 import equal from 'fast-deep-equal'
 import { writable } from 'svelte/store'
-import cloneDeep from 'lodash/cloneDeep'
+import { cloneDeep } from 'lodash-es'
 
 export function setCursorToEnd (inputelement) {
   setTimeout(() => inputelement.setSelectionRange(10000, 10000), 0)

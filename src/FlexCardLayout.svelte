@@ -160,7 +160,7 @@
   }
 
   const ro = new ResizeObserver((entries, observer) => {
-    triggerrecalc(entries[0].contentBoxSize || entries[0].contentRect.width)
+    triggerrecalc()
   })
   onMount(() => ro.observe(layoutelement))
   onDestroy(() => ro.disconnect())
