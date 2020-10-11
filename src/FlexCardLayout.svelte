@@ -163,6 +163,7 @@
     triggerrecalc(entries[0].contentBoxSize || entries[0].contentRect.width)
   })
   onMount(() => ro.observe(layoutelement))
+  onDestroy(() => ro.disconnect())
 </script>
 
 <style>

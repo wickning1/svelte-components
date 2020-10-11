@@ -1,6 +1,6 @@
 <script>
   export let className = ''
-  import { getContext, onMount } from 'svelte'
+  import { getContext, onMount, onDestroy } from 'svelte'
   import ResizeObserver from 'resize-observer-polyfill'
   import { CARDLAYOUT } from './FlexCardLayout.svelte'
   const block = {}
@@ -16,6 +16,7 @@
     saveh = h
   })
   onMount(() => ro.observe(block.element))
+  onDestroy(() => ro.disconnect())
 </script>
 
 <style>
