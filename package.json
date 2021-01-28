@@ -48,6 +48,7 @@
     "url": "https://github.com/wickning1/svelte-components/issues"
   },
   "homepage": "https://github.com/wickning1/svelte-components#readme",
+  "sideEffects": false,
   "files": [
     "dist",
     "src"
