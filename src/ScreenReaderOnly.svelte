@@ -16,6 +16,9 @@
     position: absolute !important;
     width: 1px !important;
     white-space: nowrap !important;
+    font-size: 20px !important;
+    background: white !important;
+    color: black !important;
   }
 </style>
 
