@@ -299,7 +299,7 @@
     </li>
   </ul>
   <ScreenReaderOnly id={descriptionid} arialive="assertive">
-    <span>{selected.length ? selected.length + ' selected' : 'select multiple'}, up down to choose, left right to select existing choices</span>
+    <span>{selected.length ? selected.length + ' selected' : 'select multiple'}, up down to choose, left right to hilite existing choices</span>
     {#if menushown}<span>{availablemessage}, touch users explore to find autocomplete menu</span>{/if}
   </ScreenReaderOnly>
   <ul id={menuid} bind:this={menuelement} on:keydown={menukeydown} on:focusout={onfocusout}
